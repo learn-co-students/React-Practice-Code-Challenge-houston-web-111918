@@ -24,9 +24,15 @@ class App extends Component {
   }
 
   resetVisibility = () => {
-    this.setState({
-      currentIndex: this.state.currentIndex + 4
-    })
+    if(this.state.currentIndex === 96) {
+      this.setState({
+        currentIndex: 0
+      })
+    } else {
+      this.setState({
+        currentIndex: this.state.currentIndex + 4
+      })
+    }
   }
 
   handleSushiClick = (clickedSushi) => {
