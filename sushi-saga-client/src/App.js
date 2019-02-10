@@ -16,7 +16,7 @@ class App extends Component {
   .then( res => res.json())
   .then( json => this.setState(
     {
-      sushis: json.map( (sushi) => ({...sushi, eaten: false}))
+      sushis: json.map( (sushi) => ({...sushi, eaten: false})) 
     }
   ))}
 
@@ -24,12 +24,18 @@ class App extends Component {
     return this.state.sushis.slice(this.state.startDisplay, this.state.startDisplay+4)
   }
 
+  onMoreSushi = () => {
+    this.setState({
+      startDisplay: this.state.startDisplay+4
+    })
+  }
+
   render() {
   
   
     return (
       <div className="app">
-        <SushiContainer  sushis={this.sushiDisplay()}/> 
+        <SushiContainer  sushis={this.sushiDisplay()} onMoreSushi={this.onMoreSushi}/> 
         <Table />
       </div>
     );
