@@ -8,7 +8,8 @@ const API = "http://localhost:3000/sushis"
 class App extends Component {
   state = {
     sushis: [],
-    startDisplay: 0 
+    startDisplay: 0,
+    wallet: 100
   }
 
   componentDidMount() {
@@ -30,13 +31,33 @@ class App extends Component {
     })
   }
 
+  eatSushi = (s) => {
+    if (this.state.wallet >= s.price ) {
+      this.setState({
+        sushis: this.state.sushis.map( (sushi) => {
+          if (sushi.id === s.id) { 
+            return {...sushi, eaten: true} 
+          } else {
+            return sushi
+          }
+        })
+      }, () => this.chargePlate(s) )
+    }
+  }
+
+  chargePlate = (s) => {
+    this.setState({
+      wallet: this.state.wallet - s.price
+    })
+  }
+
   render() {
-  
+    let eatenSushis = this.state.sushis.filter( sushi => sushi.eaten )
   
     return (
       <div className="app">
-        <SushiContainer  sushis={this.sushiDisplay()} onMoreSushi={this.onMoreSushi}/> 
-        <Table />
+        <SushiContainer  sushis={this.sushiDisplay()} onMoreSushi={this.onMoreSushi} eatSushi={this.eatSushi}/> 
+        <Table eatenSushis={eatenSushis} wallet={this.state.wallet}/>
       </div>
     );
   }

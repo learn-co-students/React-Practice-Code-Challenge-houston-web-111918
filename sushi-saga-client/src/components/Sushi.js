@@ -5,8 +5,7 @@ const Sushi = (props) => {
   let { sushi } = props
   return (
     <div className="sushi">
-      <div className="plate" 
-           onClick={/* Give me a callback! */  null}>
+      <div className="plate" onClick={props.onClick} >
         { sushi.eaten
           ? null
           : <img src={sushi.img_url} width="100%" />
