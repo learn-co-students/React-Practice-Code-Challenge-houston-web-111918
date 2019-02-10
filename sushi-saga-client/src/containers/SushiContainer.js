@@ -3,11 +3,7 @@ import MoreButton from '../components/MoreButton'
 import Sushi from '../components/Sushi'
 
 const SushiContainer = (props) => {
-  // state = {
-  //   index: 0
-  // }
-// console.log(props)
-  // console.log('length', props.sushi.length)
+ 
   return (
     <Fragment>
       <div className="belt">
